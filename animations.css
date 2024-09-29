@@ -1,0 +1,8 @@
+.feadin {
+  animation: feadin 2s ease-in-out;
+}
+@keyframes feadin {
+  from {
+    opacity: 0;
+  }
+}

@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Social Engineering Techniques Visualization</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #f4f4f4;
+        }
+
+        .technique-container {
+            display: flex;
+            justify-content: space-around;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            width: 80%;
+            max-width: 1200px;
+        }
+
+        .technique {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            text-align: center;
+            width: 300px;
+            margin: 20px;
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        p {
+            text-align: left;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+
+        .animation {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+
+        .animation.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="technique-container">
+        <h1>Common Social Engineering Techniques</h1>
+        <div class="technique animation" data-animation-delay="0">
+            <h2>Phishing</h2>
+            <img src="phishing.jpg" alt="Phishing Attack">
+            <p>Attackers send fraudulent emails or messages pretending to be from reputable sources, tricking
+                victims into revealing personal information or downloading malware.</p>
+        </div>
+
+        <div class="technique animation" data-animation-delay="200">
+            <h2>Impersonation</h2>
+            <img src="impersonation.jpg" alt="Impersonation Attack">
+            <p>Scammers pretend to be someone the victim trusts, such as a colleague or authority figure, to gain
+                access to secure areas or data.</p>
+        </div>
+
+        <div class="technique animation" data-animation-delay="400">
+            <h2>Bypassing Security</h2>
+            <img src="bypassing-security.jpg" alt="Bypassing Security Measures">
+            <p>Exploiting trust relationships to bypass security measures and gain physical or digital access.</p>
+        </div>
+
+        <div class="technique animation" data-animation-delay="600">
+            <h2>Data Theft</h2>
+            <img src="data-theft.jpg" alt="Data Theft">
+            <p>Once inside, attackers steal confidential information, leading to data breaches and identity theft.
+            </p>
+        </div>
+    </div>
+
+    <script>
+        window.addEventListener("load", function () {
+            const techniques = document.querySelectorAll(".technique");
+
+            techniques.forEach(function (technique, index) {
+                setTimeout(function () {
+                    technique.classList.add("visible");
+                }, index * 200);
+            });
+        });
+    </script>
+</body>
+
+</html>

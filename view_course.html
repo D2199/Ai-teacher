@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Courses</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        main {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            margin: 10px;
+
+            padding: 10px;
+            text-align: center;
+            color: wheat;
+        }
+
+        .courses {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, 300px);
+            gap: 20px;
+
+        }
+
+        .title {
+            background-color: #f45f36;
+            padding: 10px;
+            cursor: pointer;
+        }
+
+        .card {
+            background-color: rgb(56, 124, 184);
+            padding: 5px;
+            box-shadow: 5px 5px 10px black;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+
+        }
+
+        .descr {
+            text-align: start;
+            margin: 10px;
+            text-overflow: ellipsis;
+
+        }
+
+        .tutor-btn {
+            background-color: #36f43c;
+            width: 100%;
+            padding: 8px;
+            border-radius: 10px;
+            cursor: pointer;
+            border: none;
+            color: wheat;
+            font-size: 20px;
+            font-weight: 600;
+
+        }
+    </style>
+</head>
+
+<body>
+    <nav>
+
+        <li class="btn"><a href="./create_sylab.html">create course</a></li>
+        <li class="btn"><a href="">Settings</a></li>
+        <li class="btn"><a href="view_course.html">view courses</a></li>
+
+    </nav>
+    <main>
+        <div class="courses">
+
+
+        </div>
+    </main>
+    <script>
+        function redirect(url) {
+
+            const absoluteURL = new URL(
+                url,
+                window.location.href
+            );
+            // console.log(absoluteURL)
+            // Redirect to the absolute URL
+            window.location.href = absoluteURL.href;
+        }
+        // console.log(localStorage.length)
+        const courseCon = document.querySelector('.courses')
+        for (let i = 0; i < localStorage.length; i++) {
+            try {
+                const name = localStorage.key(i)
+                const sylab = JSON.parse(localStorage.getItem(name))
+                // console.log(typeof sylab)
+                courseCon.innerHTML += `
+                
+            <div class="card" >
+
+                <div class="title" onclick="redirect('sylab_show.html?name='+'${name}')">${sylab.course}</div>
+                <div class="thump"></div>
+                <div class="descr">${sylab.syllabus.description}</div>
+                <button onclick="redirect('dashboard.html?name='+'${name}')" class="tutor-btn">tutor</button>
+            </div>
+                `
+
+            }
+            catch { console.log(i) }
+        }
+
+    </script>
+</body>
+
+</html>

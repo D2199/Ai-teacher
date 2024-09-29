@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Syllable</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --btn-bg: #ff217d;
+            --primery-color: #272a34;
+            --secondery-color: #3476e6;
+            --tritery-color: #3476e6;
+            --btn-color: rgb(255, 255, 255);
+        }
+
+        body {
+            background-color: var(--primery-color);
+            color: white;
+            font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+        }
+
+        nav {
+            display: flex;
+            justify-content: end;
+            background-color: var(--secondery-color);
+
+            padding: 10px;
+            gap: 20px;
+        }
+
+        nav>li {
+            list-style: none;
+            background-color: var(--btn-bg);
+            padding: 10px;
+
+        }
+
+        a {
+            color: white;
+            /* padding: 10px; */
+            text-decoration: none;
+        }
+
+        .btn {
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            color: var(--btn-color);
+            background-color: var(--btn-bg);
+            font-size: 1.5sch;
+        }
+
+        .btn:hover {
+            background-color: #f45f36;
+        }
+
+        main {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            margin: 10px;
+            border: 1px solid black;
+            padding: 5px;
+            text-align: center;
+        }
+
+        .sylab {
+            /* display: flex;
+            flex-direction: column;
+            align-items: center; */
+            text-align: left;
+            width: 70%;
+        }
+
+        .sylab>h3 {
+            /* background-color: #1f48cf; */
+            padding: 1ch;
+            color: rgb(75, 164, 242);
+        }
+
+        .sylab>p {
+            padding: 1ch;
+            margin: 1ch;
+        }
+
+        summary {
+            background-color: #3476e6;
+            padding: 10px;
+            /* border: 1px solid black; */
+            margin: 5px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        .topics {
+
+            padding: 10px;
+            list-style: decimal;
+        }
+
+        /* .topics:hover {
+            background-color: greenyellow;
+        } */
+
+        .tasks {
+            list-style: disc;
+            padding: 10px;
+
+        }
+
+        .tutor-btn {
+            background-color: #f45f36;
+            width: 100px;
+            margin: 20px;
+            color: white;
+            font-weight: bolder;
+            font-size: 15px;
+        }
+    </style>
+</head>
+
+<body>
+    <nav>
+
+
+        <li class="btn"><a href="./create_sylab.html">create course</a></li>
+        <li class="btn"><a href="">Settings</a></li>
+        <li class="btn"><a href="view_course.html">view courses</a></li>
+
+    </nav>
+    <main>
+        <div class="sylab"></div>
+
+    </main>
+    <script>
+        const url = new URL(window.location.href)
+        const name = url.searchParams.get('name')
+        if (!localStorage.getItem(name)) alert('name not found.')
+        else {
+            try {
+                const Sylabel = JSON.parse(localStorage.getItem(name))
+                // console.log(Sylabel.course)
+                renderSylab(Sylabel, name)
+            }
+            catch { alert('name not found.') }
+        }
+        function redirect(url) {
+
+            const absoluteURL = new URL(
+                url,
+                window.location.href
+            );
+            // console.log(absoluteURL)
+            // Redirect to the absolute URL
+            window.location.href = absoluteURL.href;
+        }
+        function renderSylab(sylab, name) {
+            const sylabCon = document.querySelector('.sylab')
+            sylabCon.innerHTML = `
+            <h5>${name}</h5>
+            <h3>${sylab.course}</h3>
+            <p>${sylab.syllabus.description}</p>
+             <button onclick="redirect('dashboard.html?name='+'${name}')" class="tutor-btn">tutor</button>
+         
+            `
+            for (let unit of sylab.syllabus.units) {
+                const detailEl = document.createElement('details')
+                detailEl.innerHTML = `
+                    <summary>${unit.title}</summary>
+                    `
+                for (let topic of unit.topics) {
+                    detailEl.innerHTML += `<li class="topics">${topic}</li>`
+                }
+                for (let assign of unit.assignments) {
+                    detailEl.innerHTML += `<li class="tasks">${assign}</li>`
+                }
+                console.log(unit)
+                sylabCon.appendChild(detailEl)
+            }
+
+        }
+    </script>
+</body>
+
+</html>

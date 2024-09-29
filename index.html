@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dutor</title>
+  <style>
+    body {
+      padding: 0;
+      margin: 0;
+    }
+
+    /* .mermaid {
+      width: 500px;
+      overflow: hidden;
+
+    } */
+    #board {
+      width: 100%;
+    }
+
+    #board svg {
+      width: 100%;
+      text-align: center;
+      /* display: none; */
+      max-width: 100% !important;
+
+    }
+
+    .title {
+      font-size: xx-large;
+      font-weight: bolder;
+      color: blue;
+    }
+
+    .textEl {
+      /* background-color: yellowgreen; */
+      padding: 2px;
+      text-align: start;
+      /* flex-wrap: wrap;
+      font-size: auto; */
+      /* background-color: rgb(200, 197, 197); */
+      border-radius: 10px;
+      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+      padding: 10px;
+      margin: 5px;
+
+    }
+
+    .textAnimation-typing {
+      animation-name: typing;
+      animation-duration: 5s;
+      animation-timing-function: ease-in-out;
+
+    }
+
+    @keyframes typing {
+      from {
+        width: 1rem;
+        text-wrap: nowrap;
+        overflow: hidden;
+        /* transform: translateX(100px); */
+      }
+
+      to {
+        width: 100%;
+      }
+
+    }
+
+    .container {
+      border: 2px solid black;
+      flex-direction: column;
+      /* font-size: 0.1em; */
+      overflow: scroll;
+      display: flex;
+      text-align: left;
+      justify-content: center;
+      align-items: start;
+
+      /* display: grid; */
+      grid-template-columns: auto auto auto;
+      height: 100%;
+      width: 100%
+    }
+
+
+
+    /* .pieCircle {
+      background-color: black; 
+    transform: rotateX(20deg);
+    transition-timing-function: ease-in;
+     transform: scaleX(300); 
+    animation: pic 1 ease-in 0 infinite 2;
+    } */
+
+
+    /* @keyframes pic {
+      0% {
+         transform: rotateX(20deg); 
+    }
+
+    50% {
+      transform: rotateX(50deg);
+    }
+
+    100% {
+      transform: rotateX(100deg);
+    }
+    }*/
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="textEl title textAnimation-typing">'Common Social Engineering Techniques'</div>
+
+    <div id="board">
+
+    </div>
+    <div class="textEl textAnimation-typing">'Phishing: Attackers send fraudulent emails or messages pretending to be
+      from reputable
+      sources,
+      tricking victims into revealing personal information or downloading malware.''</div>
+    <div class="textEl textAnimation-typing">Impersonation: Scammers pretend to be someone the victim trusts, such as a
+      colleague or
+      authority figure, to gain access to secure areas or data.</div>
+    <div class="textEl textAnimation-typing">'Bypassing Security: Exploiting trust relationships to bypass security
+      measures and gain
+      physical or digital access.' </div>
+    <div class="textEl">Data Theft: Once inside, attackers steal confidential information, leading to data breaches and
+      identity theft.</div>
+    <div class="textEl"></div>
+    <script type="module">
+
+
+      // console.log(mermaid)
+      // console.log(await drawDiagram())
+      // const l = mermaid.render('.mermaid', ```
+      //     graph LR
+      //     classDef living stroke - dasharray: 5 5;
+      //     classDef dead fill: #ffaaaa, stroke: #ff0000, stroke - width: 2px;
+      //     classDef male fill: #aaddff, stroke:#5555ff, stroke - width: 2px;
+      //     classDef female fill: #ffaaaa, stroke: #ff0000, stroke - width: 2px;
+
+      //     subgraph Fertilization
+      // Sperm((Sperm))::: male
+      // Egg((Egg))::: female
+      // Zygote((Zygote))::: living
+      // end
+
+      //     subgraph Pregnancy
+      // Embryo((Embryo))::: living
+      // Fetus((Fetus))::: living
+      // end
+
+      //     subgraph Birth
+      // Newborn((Newborn))::: living
+      // end
+
+      //     subgraph Life
+      // Infant((Infant))::: living
+      // Child((Child))::: living
+      // Adolescent((Adolescent))::: living
+      // Adult((Adult))::: living
+      // Elderly((Elderly))::: living
+      // end
+
+      //     subgraph Death
+      // Deceased((Deceased))::: dead
+      // end
+
+      // Sperm - > Zygote
+      // Egg-- > Zygote
+      // Zygote-- > Embryo
+      // Embryo-- > Fetus
+      // Fetus-- > Newborn
+      // Newborn-- >| Growth and Development | Infant
+      // Infant-- > Child
+      // Child-- > Adolescent
+      // Adolescent-- > Adult
+      // Adult-- > Elderly
+      // Elderly-- > Deceased```.replace('\n', ';'))
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+    <script type="module" src="main.js"></script>
+    <script>
+      // gsap.from('.mermaid', { duration: 1, x: '100', delay: 1 })
+      // gsap.registerPlugin(MotionPathPlugin);
+
+
+      // console.log(document.getElementsByClassName('pieOuterCircle')[0])
+      // console.log(gsap)
+      document.body.onload = () => {
+        // gsap.from('.pieCircle', { duration: 1, x: '100', rotateY: "20deg" })
+        // gsap.to("#board", {
+        //   duration: 5,
+        //   repeat: 12,
+        //   repeatDelay: 3,
+        //   yoyo: true,
+        //   ease: "power1.inOut",
+        //   motionPath: {
+        //     path: ".pieCircle",
+        //     align: ".pieCircle",
+        //     autoRotate: true,
+        //     alignOrigin: [0.5, 0.5]
+        //   }
+        // });
+        // console.log(document.querySelector(''))
+      }
+      // gsap.from(l, { duration: 1, x: '100', stagger: 0.5 })
+
+    </script>
+</body>
+
+</html>
