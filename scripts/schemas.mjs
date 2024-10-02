@@ -87,11 +87,15 @@ export const schemas = {
                   },
                   textTool: {
                     type: "object",
-                    description: "display an text to screen",
+                    description: "display an markdown text to screen",
                     properties: {
                       text: {
                         type: "string",
-                        description: "text that display on the screen",
+                        description: "markdown text that display on the screen",
+                      },
+                      color: {
+                        type: "string",
+                        description: "css color to color the text",
                       },
                     },
                     required: ["text"],

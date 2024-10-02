@@ -1,4 +1,5 @@
 import { schemas } from "./schemas.mjs";
+
 export const syllabusPrompt = (input) => {
   const message = `You are a curriculum maker in a college. Your task is to create a comprehensive syllabus for the given name ${input.topic}. Ensure the syllabus includes:
   
@@ -130,7 +131,9 @@ output in json format
 artial_variables`;
 
 export const mermaidPrompt = (input) => {
-  return `Generate Mermaid code to visualize the topic "${input.description}". Provide a clear and concise diagram that effectively represents the key elements and relationships within the topic.`;
+  const message = `Generate Mermaid code to visualize the topic "${input.description}". Provide a clear and concise diagram that effectively represents the key elements and relationships within the topic.`;
+  const param = { message };
+  return param;
 };
 
 export const kidExplainPrompt = (input) => {
@@ -141,7 +144,7 @@ Today, we will focus on ${input.topic} , an essential concept that will help us 
 By the end of our journey, you will have a comprehensive understanding of ${input.topic} , and who knows, you might even discover something new that could change the way we see this planet forever! Are you ready to embark on this exciting adventure and become masters of ${input.topic} ? 
 
 example output
-textTool{{text: "displayed text"}}: Displays text on the canvas at the specified coordinates with the given color.
+textTool{{text: "Markdown-formatted text"}}: get Markdown-formatted text display on the canvas at the specified coordinates with the given color.
 diagramTool{{context:"desription or instructions"}}:gets an detailed instruction to make an mermaid diagram
 `;
   const param = {
@@ -173,6 +176,20 @@ example output
 textTool{{text: "displayed text"}}: Displays text on the canvas at the specified coordinates with the given color.
 diagramTool{{context:"desription or instructions"}}:gets an detailed instruction to make an mermaid diagram
 `;
+  const param = {
+    message,
+    response_format: {
+      type: "json_object",
+      schema: schemas.visuals,
+    },
+  };
+  return param;
+};
+
+export const AskingPrompt = (input) => {
+  const message = `
+  "I'd like to seek clarification on a specific aspect of ${input.topic} within the subject of ${input.unit}. My question is ${input.doubt}. I request a concise explanation, and I'd appreciate if we could keep the discussion centered on this topic, avoiding any tangents."
+  `;
   const param = {
     message,
     response_format: {

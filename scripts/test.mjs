@@ -24,6 +24,7 @@
 //     .replace("mermaid", "")
 //     .replace(/`/g, "")
 // );
+import { MermaidPasser } from "./utils.mjs";
 
 import { Agents } from "./Agent.mjs";
 import {
@@ -31,15 +32,27 @@ import {
   explainPrompt,
   kidExplainPrompt,
   visualPrompt,
+  AskingPrompt,
+  mermaidPrompt,
 } from "./Prompts.mjs";
 import { settings } from "./settings.mjs";
 const VisualAgt = new Agents(settings.ApiEndpoint, settings.ApiKey);
 VisualAgt.setBody(
-  kidExplainPrompt({
-    topic:
-      "Setting up Python: Installing Python and choosing an Integrated Development Environment (IDE). under geting started with python  ",
+  AskingPrompt({
+    topic: "Introduction to Web Frameworks",
+    unit: "Getting Started with Django ",
+    doubt: "give an diagram which explain MVT",
   })
 );
 VisualAgt.getData().then((d) => {
   console.log(JSON.parse(d.text));
 });
+// VisualAgt.setBody(
+//   mermaidPrompt({
+//     description:
+//       "This diagram illustrates the Model-View-Template (MVT) architecture pattern used in Django, a popular Python web framework. MVT is a variation of the Model-View-Controller (MVC) pattern, tailored for web development.\\\\[/n\\\\",
+//   })
+// );
+// VisualAgt.getData().then((d) => {
+//   console.log(MermaidPasser(d.text));
+// });

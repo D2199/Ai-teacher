@@ -14,6 +14,7 @@
             display: flex;
             flex-direction: column;
             gap: 5px;
+            height: 90vh;
             color: aliceblue;
 
         }
@@ -34,7 +35,7 @@
         .course_con {
             display: flex;
 
-            height: 90vh;
+
         }
 
         details {
@@ -70,14 +71,49 @@
         .board {
 
             width: 100%;
+            position: relative;
+            margin: 0 auto;
 
+            overflow: scroll;
 
         }
 
         .active {
             display: flex;
-            width: 100%;
-            background-color: aquamarine;
+            gap: 10px;
+            width: 100vw;
+            margin: 10px;
+
+        }
+
+        .message {
+            background-color: rgb(180, 110, 7);
+            height: 200px;
+            width: 50%;
+        }
+
+        .post-msg {
+            background-color: rgb(21, 21, 27);
+
+            height: 80%;
+            padding: 5px;
+            overflow: scroll;
+        }
+
+        .msg-input {
+            display: flex;
+        }
+
+        .msg-input>button {
+            background-color: aqua;
+            width: 100px;
+
+
+        }
+
+        .notes {
+            width: 90%;
+            color: aliceblue;
         }
 
         /* 
@@ -90,6 +126,12 @@
                 display: none;
             }
 
+            .active {
+
+                flex-direction: column;
+            }
+
+
         }
 
         #renderer {
@@ -97,7 +139,8 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            height: 90%;
+            flex-wrap: wrap;
+            min-height: 80vh
         }
 
         .navigator {
@@ -123,45 +166,74 @@
         }
 
         .navigator>button {
-            width: 100px;
-            padding: 5px;
+
             font-size: medium;
             font-weight: bold;
             cursor: pointer;
         }
+
+        /* 
+        .navigator {
+            margin: 10px;
+        } */
 
         #caption {
             font-size: 12px;
             object-fit: fill;
             color: aliceblue;
             height: fit-content;
+            margin: 10px;
         }
 
-        .message {
-            width: 45%;
-            background-color: aqua;
-        }
-
-        .notes {}
-
-        .msg-input {
-            display: flex;
-
-        }
-
-        .msg-input:nth-child(1) {
-            width: 500px;
-        }
-
-        .msg-input:nth-child(2) {
-            background-color: rgb(13, 22, 3);
-            width: 100px;
+        .msgs {
+            color: aliceblue;
+            font-size: larger;
+            margin: 2px;
         }
 
         @media screen and (max-width:500px) {
             .sylab {
                 display: none;
             }
+        }
+
+
+
+        .menu {
+
+            position: absolute;
+            width: 100%;
+            height: 100%;
+
+            opacity: 0;
+            background-color: rgb(32, 33, 34);
+            transition-duration: 500ms;
+            transition-property: opacity;
+            justify-content: center;
+            transition-timing-function: ease-in-out;
+            align-items: center;
+            display: flex;
+        }
+
+        .board:hover .menu {
+            opacity: 0.9;
+            z-index: 1;
+        }
+
+        #mermaidDiagram {
+            width: 100%;
+
+        }
+
+        .pass-btn {
+            background-color: red;
+            padding: 10px;
+            font-size: xx-large;
+            border-radius: 50%;
+
+            cursor: pointer;
+            color: aliceblue;
+
         }
     </style>
     <link rel="stylesheet" href="animations.css">
@@ -179,29 +251,46 @@
         <div class="course_con">
             <div class="sylab"></div>
             <div class="board">
+                <div class="menu">
+
+                    <div class="navigator"><button id="pre-slide">previous</button>
+                        <div class="pass-btn">!></div>
+                        <button id="post-slide">next</button>
+                    </div>
+                </div>
                 <div id="renderer">
+
                     <div class="textElement">Wellcome to Dutor</div>
 
                 </div>
-                <div class="navigator"><button>previous</button>
-                    <p id="caption"> </p><button>next</button>
-                </div>
+                <p id="caption"></p>
+
+
             </div>
         </div>
         <div class="active">
             <div class="message">
                 <div class="post-msg"></div>
-                <div class="msg-input"><input type="text" /><button>send</button></div>
+                <div class="msg-input"><input type="text" id="msg"></input><button disabled id="send-msg">send</button>
+                </div>
             </div>
             <div class="notes">
                 <h3>Notes</h3>
-                <textarea name="" id="" rows="10"></textarea>
+                <textarea name="" id="note" rows="10"></textarea>
             </div>
         </div>
     </main>
+    <script type="module" src="https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs">
+        // import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs";
+        mermaid.initialize({
+            startOnLoad: false,
 
+            securityLevel: "loose",
+        });
+        console.log(mermaid)
+    </script>
     <script type="module" src="teach.js"></script>
-    <script type="module" src="https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs"></script>
+    <!-- <script type="module" src="https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs"></script> -->
 
 </body>
 

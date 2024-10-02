@@ -1,5 +1,5 @@
 // import { tag } from "./scripts/Tag.js";
-import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs";
+// import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs";
 // mermaid.initialize({
 //   startOnLoad: false,
 
