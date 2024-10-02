@@ -1,5 +1,9 @@
 import { Agents } from "./scripts/Agent.mjs";
-import { visualPrompt, kidExplainPrompt } from "./scripts/Prompts.mjs";
+import {
+  visualPrompt,
+  kidExplainPrompt,
+  AskingPrompt,
+} from "./scripts/Prompts.mjs";
 import { settings } from "./scripts/settings.mjs";
 import { Tools } from "./scripts/Tools.mjs";
 import { render, Presentation } from "./scripts/render.mjs";
@@ -18,8 +22,10 @@ else {
     alert("name not found.");
   }
 }
-const cuttentTopics = [];
 const Sylabel = JSON.parse(localStorage.getItem(nameid));
+let cuttentTopic = {};
+cuttentTopic.course = Sylabel.course;
+
 const presentation = new Presentation(settings.AutoPlay);
 // const playBtn = document.getElementsByClassName("play-btn");
 // for (let i = 0; i < playBtn.length; i++) {
@@ -53,6 +59,8 @@ for (let i = 0; i < topicPlay.length; i++) {
 }
 function play(unitIndex, topicIndex = 0) {
   const topic = Sylabel.syllabus.units[unitIndex].topics[topicIndex];
+  cuttentTopic.topic = topic;
+  cuttentTopic.unit = Sylabel.syllabus.units[unitIndex];
   teache(
     topic +
       " under " +
@@ -81,13 +89,15 @@ function renderSylab(sylab) {
 
 async function teache(topic) {
   const VisualAgt = new Agents(settings.ApiEndpoint, settings.ApiKey);
-  VisualAgt.setBody(kidExplainPrompt({ topic }));
+  VisualAgt.setBody(visualPrompt({ topic }));
   await VisualAgt.getData().then((d) => {
     try {
       let slides = JSON.parse(d.text);
       console.log(slides);
       // renderVisuals()
-      presentation.render(slides.slides);
+      presentation.slides = slides;
+      presentation.renderAllVisualsAsync();
+      // presentation.render(slides.slides);
       // renderAllSlidesAsync(slides.slides);
     } catch {
       alert("server side error please try again..");
@@ -263,11 +273,30 @@ const sms = document.querySelector("#msg");
 const postMsg = document.querySelector(".post-msg");
 const smsAgent = new Agents(settings.ApiEndpoint, settings.ApiKey);
 
-document.querySelector("#send-msg").addEventListener("click", () => {
+const sendBtn = document.querySelector("#send-msg");
+sendBtn.addEventListener("click", () => {
   console.log(sms.value);
   postMsg.innerHTML += `<div class="msgs">${sms.value}</div>`;
+  smsAgent.setBody(
+    AskingPrompt({
+      topic: cuttentTopic.topic,
+      unit: cuttentTopic.unit,
+      doubt: sms.value,
+    })
+  );
+  smsAgent.getData().then((d) => {
+    const explain = JSON.parse(d.text);
+    if (presentation.rendering) {
+      presentation.slides = [...presentation.slides, ...explain.slides];
+      console.log(presentation.slides);
+    } else {
+      console.log(explain.slides);
+      for (let s of explain.slides) {
+        presentation.renderVisualsAsync(s);
+      }
+    }
+  });
   sms.value = "";
-  // Agents.setBody(AskingPrompt(s));
 });
 
 document.querySelector("#note").addEventListener("change", (e) => {

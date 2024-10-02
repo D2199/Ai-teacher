@@ -187,9 +187,11 @@ diagramTool{{context:"desription or instructions"}}:gets an detailed instruction
 };
 
 export const AskingPrompt = (input) => {
-  const message = `
-  "I'd like to seek clarification on a specific aspect of ${input.topic} within the subject of ${input.unit}. My question is ${input.doubt}. I request a concise explanation, and I'd appreciate if we could keep the discussion centered on this topic, avoiding any tangents."
-  `;
+  const message = `your are the tutor ,teaching the course ${input.course} now i want to ask one thing ,${input.doubt} `;
+  // `
+  // i am currently learning this course ${input.course}
+  // "I'd like to seek clarification on a specific aspect of ${input.topic} within the subject of ${input.unit}. My question is ${input.doubt}. I request a concise explanation, and I'd appreciate if we could keep the discussion centered on this topic, avoiding any tangents."
+  // `;
   const param = {
     message,
     response_format: {

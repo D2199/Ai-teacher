@@ -81,23 +81,37 @@
         .active {
             display: flex;
             gap: 10px;
-            width: 100vw;
-            margin: 10px;
+            flex-wrap: wrap;
+            margin: 5px;
 
         }
 
         .message {
             background-color: rgb(180, 110, 7);
-            height: 200px;
-            width: 50%;
+            height: 300px;
+            width: 50vw;
+            flex-grow: 1;
+            max-width: 100vw;
+
         }
 
         .post-msg {
             background-color: rgb(21, 21, 27);
-
-            height: 80%;
+            height: 90%;
             padding: 5px;
-            overflow: scroll;
+
+            max-width: 100%;
+            overflow-x: scroll;
+
+        }
+
+        .msgs {
+            background-color: rgb(47, 54, 54);
+            text-wrap: wrap;
+            overflow-wrap: break-word;
+            padding: 5px;
+            max-width: 100%;
+            border-radius: 5px;
         }
 
         .msg-input {
@@ -112,7 +126,7 @@
         }
 
         .notes {
-            width: 90%;
+            flex-grow: 1;
             color: aliceblue;
         }
 
@@ -124,6 +138,10 @@
         @media screen and (max-width:400) {
             .sylab {
                 display: none;
+            }
+
+            .message {
+                width: 100vw;
             }
 
             .active {
@@ -271,7 +289,7 @@
         <div class="active">
             <div class="message">
                 <div class="post-msg"></div>
-                <div class="msg-input"><input type="text" id="msg"></input><button disabled id="send-msg">send</button>
+                <div class="msg-input"><input type="text" id="msg"></input><button id="send-msg">send</button>
                 </div>
             </div>
             <div class="notes">

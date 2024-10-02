@@ -76,6 +76,8 @@ export class Presentation {
     this.renderer = document.querySelector("#renderer");
     this.narrationElement = document.querySelector("#caption");
     this.speechSynthesis = window.speechSynthesis;
+    this.rendering = false;
+    this.slides = [];
     // this.renderer.appendChild(this.narrationElement);
   }
 
@@ -83,6 +85,33 @@ export class Presentation {
     console.log(this.currentSlideIndex);
     this.renderer.innerHTML = "";
     this.speechSynthesis.cancel();
+    this.rendering = true;
+    // console.log(this.rendering);
+    for (const [visualKey, visualValue] of Object.entries(slide.visuals)) {
+      for (const [propertyKey, propertyValue] of Object.entries(visualValue)) {
+        const element = await Tools[propertyKey](propertyValue);
+        // console.log(element);
+        this.renderer.appendChild(element);
+      }
+    }
+
+    this.setCaption(slide.narration);
+    this.speech = this.playNarration(slide.narration);
+    this.speechSynthesis.speak(this.speech);
+    await new Promise((resolve) => {
+      this.speech.onend = resolve;
+    });
+    this.rendering = false;
+    // console.log(this.rendering);
+    // await this.playNarration(slide.narration);
+  }
+  async renderAllVisualsAsync(currentSlideIndex = 0) {
+    this.renderer.innerHTML = "";
+    this.speechSynthesis.cancel();
+    this.rendering = true;
+    let slide = this.slides[this.currentSlideIndex];
+    console.log(slide, this.slides);
+    // console.log(this.rendering);
     for (const [visualKey, visualValue] of Object.entries(slide.visuals)) {
       for (const [propertyKey, propertyValue] of Object.entries(visualValue)) {
         const element = await Tools[propertyKey](propertyValue);
@@ -97,10 +126,11 @@ export class Presentation {
     await new Promise((resolve) => {
       this.speech.onend = resolve;
     });
-
-    // await this.playNarration(slide.narration);
+    this.rendering = false;
+    if (this.playAll) {
+      this.skipToNext();
+    }
   }
-
   setCaption(narration) {
     this.narrationElement.textContent = narration;
   }
@@ -128,32 +158,38 @@ export class Presentation {
   pause() {
     // const narrationSpeech = speech(this.narrationElement.textContent);
     this.speechSynthesis.pause(this.speech);
-    console.log(this.speechSynthesis);
+    // console.log(this.speechSynthesis);
+  }
+  resume() {
+    this.speechSynthesis.resume(this.speech);
   }
 
   skipToNext() {
     if (this.currentSlideIndex < this.slides.length - 1) {
       this.currentSlideIndex++;
-      this.renderVisualsAsync(this.slides[this.currentSlideIndex]);
+      this.renderAllVisualsAsync(this.slides[this.currentSlideIndex]);
     }
   }
 
   skipToPrevious() {
     if (this.currentSlideIndex > 0) {
-      console.log(this.currentSlideIndex);
+      // console.log(this.currentSlideIndex);
       this.currentSlideIndex--;
       this.renderVisualsAsync(this.slides[this.currentSlideIndex]);
     }
   }
   async render(slides) {
     this.slides = slides;
+
     // await this.renderVisualsAsync(this.slides[this.currentSlideIndex]);
     if (this.playAll) {
       // for (let i of this.slides) {
       //   this.skipToNext();
       // }
+
       for (const slide of this.slides) {
         await this.renderVisualsAsync(slide);
+        console.log(slides);
       }
       // this.skipToNext();
     } else {
