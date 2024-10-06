@@ -90,7 +90,9 @@ function getSylable(name, description) {
 document.getElementById("form").addEventListener("submit", (e) => {
   e.preventDefault();
   const name = document.getElementById("course-name").value;
-  const description = document.getElementById("course-description").value;
+  const description = document
+    .getElementById("course-description")
+    .value.trim();
 
   if (localStorage.getItem(name)) {
     alert("the name already exist");

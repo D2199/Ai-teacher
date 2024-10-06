@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="animations.css">
+    <style>
+        main {
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 10px;
+            flex-direction: column;
+        }
+
+        .form {
+            width: 50vw;
+            color: wheat;
+            font-size: large;
+            background-color: rgb(7, 134, 134);
+        }
+
+        input {
+            padding: 10px;
+        }
+
+        .form-items {
+            text-align: left;
+            /* background-color: blue; */
+            padding: 10px;
+            width: 100%;
+
+        }
+
+        .text-visual {
+            background-color: black;
+            border: 2px solid brown;
+
+            color: aliceblue;
+        }
+    </style>
+</head>
+
+<body>
+    <nav>
+        <li class="btn"><a href="./create_sylab.html">create course</a></li>
+        <li class="btn"><a href="./settings.html">Settings</a></li>
+        <li class="btn"><a href="view_course.html">view courses</a></li>
+
+    </nav>
+    <main>
+        <div class="form">
+            <div class="form-items"><label for="">Auto play</label> <input type="checkbox" value="" checked
+                    onchange="settings.AutoPlay=checked;console.log(settings)" name="AutoPlay" id="auto_play"
+                    class="set"></div>
+            <div class="form-items"><label for="">Text Animation</label><select name="TextAnimation" id="TextAnimation"
+                    class="set" onchange="txtViusal()">
+                    <option value="feadin">feadin</option>
+                    <option value="Transform">Transform</option>
+                </select>
+
+                <div class="text-visual"> Animation visual</div>
+
+            </div>
+            <details>
+                <summary>Voise settings</summary>
+                <div class="form-items">
+
+                    <label for="">voice</label>
+                    <select name="voice" class="voice-set " id="voice"></select>
+                </div>
+                <div class="form-items"><label for="">pitch</label><input type="range" class="voice-set " name="pitch"
+                        id="pitch"></div>
+                <div class="form-items"><label for="">rate</label><input type="range" class="voice-set  " name="rate"
+                        id="rate"></div>
+                <div class="form-items"><input value="hello speeker testing" name="" id="speech_text" cols="30"
+                        rows="10"></input><button onclick="speak()">play</button></div>
+            </details>
+            <div class="form-items"><button onclick="save()">save</button></div>
+            <!-- <div class="form-items"><label for="">language</label><select name="" id=""></select></div> -->
+        </div>
+    </main>
+
+    <script>
+        const settings = JSON.parse(localStorage.getItem('settings'))
+        document.querySelectorAll('.set').forEach((e) => {
+            e.value = settings[e.name]
+        })
+        document.querySelectorAll('.voice-set').forEach((e) => {
+            if (e.name == 'pitch') {
+                e.value = settings.voice[e.name] * 100 / 2
+            }
+            else if (e.name == 'rate') {
+                e.value = settings.voice[e.name] * 100 / 10
+            }
+            e.value = settings.voice[e.name]
+            console.log(e.value)
+        })
+        const voiceSet = document.querySelectorAll('.voice-set')
+        voiceSet.forEach((e) => {
+            e.addEventListener('change', () => {
+                // console.log(e.name == 'pitch')
+                if (e.name == 'pitch') {
+                    settings.voice[e.name] = (2 / 100 * Number(e.value))
+                }
+                else if (e.name == 'rate') {
+                    settings.voice[e.name] = 10 / 100 * Number(e.value)
+                }
+                else {
+                    console.log(e.value)
+                    settings.voice[e.name] = e.value
+                }
+                console.log(settings)
+            })
+        })
+        function speak() {
+            let utter = new SpeechSynthesisUtterance(document.querySelector('#speech_text').value)
+            utter.rate = settings.voice.rate
+            utter.pitch = settings.voice.pitch
+            speechSynthesis.speak(utter)
+        }
+        // document.querySelector('#voice').innerHTML
+        // console.log(speechSynthesis.getVoices())
+        function loadVoices() {
+            const voiceSelect = document.querySelector("#voice")
+            voices = speechSynthesis.getVoices();
+            for (let i = 0; i < voices.length; i++) {
+                const option = document.createElement("option");
+                option.textContent = `${voices[i].name} (${voices[i].lang})`;
+                option.value = voices[i];
+                voiceSelect.appendChild(option);
+            }
+        }
+        loadVoices()
+        function txtViusal() {
+            document.querySelector('.text-visual').classList.add(document.querySelector('#TextAnimation').value)
+        }
+        //         document.querySelector('#TextAnimation').addEventListener('change',(e)=>{
+        // document(e.target.value)
+        //         })
+        function save() {
+            localStorage.setItem('settings', JSON.stringify(settings))
+        }
+    </script>
+</body>
+
+
+</html>

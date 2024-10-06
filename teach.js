@@ -25,7 +25,7 @@ else {
 const Sylabel = JSON.parse(localStorage.getItem(nameid));
 let cuttentTopic = {};
 cuttentTopic.course = Sylabel.course;
-
+const loader = document.querySelector(".loader");
 const presentation = new Presentation(settings.AutoPlay);
 // const playBtn = document.getElementsByClassName("play-btn");
 // for (let i = 0; i < playBtn.length; i++) {
@@ -90,12 +90,14 @@ function renderSylab(sylab) {
 async function teache(topic) {
   const VisualAgt = new Agents(settings.ApiEndpoint, settings.ApiKey);
   VisualAgt.setBody(visualPrompt({ topic }));
+  loader.style.display = "flex";
   await VisualAgt.getData().then((d) => {
     try {
       let slides = JSON.parse(d.text);
       console.log(slides);
       // renderVisuals()
-      presentation.slides = slides;
+      loader.style.display = "none";
+      presentation.slides = slides.slides;
       presentation.renderAllVisualsAsync();
       // presentation.render(slides.slides);
       // renderAllSlidesAsync(slides.slides);
@@ -280,6 +282,7 @@ sendBtn.addEventListener("click", () => {
   smsAgent.setBody(
     AskingPrompt({
       topic: cuttentTopic.topic,
+      course: Sylabel.course,
       unit: cuttentTopic.unit,
       doubt: sms.value,
     })
@@ -291,9 +294,8 @@ sendBtn.addEventListener("click", () => {
       console.log(presentation.slides);
     } else {
       console.log(explain.slides);
-      for (let s of explain.slides) {
-        presentation.renderVisualsAsync(s);
-      }
+      presentation.slides = [...presentation.slides, ...explain.slides];
+      presentation.renderAllVisualsAsync();
     }
   });
   sms.value = "";
@@ -315,8 +317,13 @@ async function main() {
   // presentation.render();
   // await presentation.renderVisualsAsync(sample.slides[0]);
   document.querySelector(".pass-btn").addEventListener("click", () => {
-    presentation.pause();
-    speechSynthesis.pause();
+    if (presentation.speechSynthesis.paused || speechSynthesis.paused) {
+      presentation.resume();
+      speechSynthesis.resume();
+    } else {
+      speechSynthesis.pause();
+      presentation.pause();
+    }
   });
   document.querySelector("#post-slide").addEventListener("click", () => {
     presentation.skipToNext();

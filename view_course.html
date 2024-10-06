@@ -68,11 +68,9 @@
 
 <body>
     <nav>
-
         <li class="btn"><a href="./create_sylab.html">create course</a></li>
-        <li class="btn"><a href="">Settings</a></li>
+        <li class="btn"><a href="./settings.html">Settings</a></li>
         <li class="btn"><a href="view_course.html">view courses</a></li>
-
     </nav>
     <main>
         <div class="courses">
@@ -96,8 +94,10 @@
         for (let i = 0; i < localStorage.length; i++) {
             try {
                 const name = localStorage.key(i)
+                console.log(name)
                 const sylab = JSON.parse(localStorage.getItem(name))
-                // console.log(typeof sylab)
+
+                console.log(sylab)
                 courseCon.innerHTML += `
                 
             <div class="card" >

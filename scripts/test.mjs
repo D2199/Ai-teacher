@@ -34,19 +34,20 @@ import {
   visualPrompt,
   AskingPrompt,
   mermaidPrompt,
+  teachingPrompt,
 } from "./Prompts.mjs";
 import { settings } from "./settings.mjs";
 const VisualAgt = new Agents(settings.ApiEndpoint, settings.ApiKey);
-VisualAgt.setBody(
-  AskingPrompt({
-    topic: "Introduction to Web Frameworks",
-    unit: "Getting Started with Django ",
-    doubt: "give an diagram which explain MVT",
-  })
-);
-VisualAgt.getData().then((d) => {
-  console.log(JSON.parse(d.text));
-});
+// VisualAgt.setBody(
+//   AskingPrompt({
+//     topic: "Introduction to Web Frameworks",
+//     unit: "Getting Started with Django ",
+//     doubt: "give an diagram which explain MVT",
+//   })
+// );
+// VisualAgt.getData().then((d) => {
+//   console.log(JSON.parse(d.text));
+// });
 // VisualAgt.setBody(
 //   mermaidPrompt({
 //     description:
@@ -56,3 +57,11 @@ VisualAgt.getData().then((d) => {
 // VisualAgt.getData().then((d) => {
 //   console.log(MermaidPasser(d.text));
 // });
+VisualAgt.setBody(
+  teachingPrompt({
+    topic: "control statment in python ",
+  })
+);
+VisualAgt.getData().then((d) => {
+  console.log(d.text);
+});

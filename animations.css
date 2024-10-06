@@ -1,8 +1,30 @@
 .feadin {
   animation: feadin 2s ease-in-out;
+  animation-delay: 3;
 }
 @keyframes feadin {
   from {
     opacity: 0;
+    transform: translateX(-100px);
+  }
+}
+
+.typing {
+  animation: typo 2s linear 0s 1 alternate forwards;
+
+  overflow: hidden;
+  text-overflow: hidden;
+  white-space: nowrap;
+  text-overflow: hidden;
+  border-right: 1px solid black;
+  width: 0px;
+}
+
+@keyframes typo {
+  from {
+  }
+
+  to {
+    width: 100%;
   }
 }

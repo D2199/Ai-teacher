@@ -95,7 +95,8 @@ export const schemas = {
                       },
                       color: {
                         type: "string",
-                        description: "css color to color the text",
+                        description:
+                          "css color to color the text in the black board",
                       },
                     },
                     required: ["text"],

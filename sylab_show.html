@@ -143,15 +143,21 @@
     </main>
     <script>
         const url = new URL(window.location.href)
-        const name = url.searchParams.get('name')
-        if (!localStorage.getItem(name)) alert('name not found.')
+        const name = url.searchParams.get('name').trim()
+
+        // console.log(name, localStorage.key(4))
+        console.log(JSON.parse(localStorage.getItem(name)))
+        if (!localStorage.getItem(name)) alert(`name "${name}" not found.`)
         else {
             try {
                 const Sylabel = JSON.parse(localStorage.getItem(name))
-                // console.log(Sylabel.course)
+                console.log(Sylabel.course)
                 renderSylab(Sylabel, name)
             }
-            catch { alert('name not found.') }
+            catch (e) {
+                console.log(e)
+                alert('sylabes not get properly.')
+            }
         }
         function redirect(url) {
 

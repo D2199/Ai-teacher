@@ -78,6 +78,7 @@ export class Presentation {
     this.speechSynthesis = window.speechSynthesis;
     this.rendering = false;
     this.slides = [];
+    this.pgCon = document.querySelector("#pgNum");
     // this.renderer.appendChild(this.narrationElement);
   }
 
@@ -110,6 +111,9 @@ export class Presentation {
     this.speechSynthesis.cancel();
     this.rendering = true;
     let slide = this.slides[this.currentSlideIndex];
+    this.pgCon.innerHTML = `${this.currentSlideIndex + 1}/${
+      this.slides.length
+    }`;
     console.log(slide, this.slides);
     // console.log(this.rendering);
     for (const [visualKey, visualValue] of Object.entries(slide.visuals)) {
@@ -167,6 +171,7 @@ export class Presentation {
   skipToNext() {
     if (this.currentSlideIndex < this.slides.length - 1) {
       this.currentSlideIndex++;
+
       this.renderAllVisualsAsync(this.slides[this.currentSlideIndex]);
     }
   }
@@ -175,6 +180,7 @@ export class Presentation {
     if (this.currentSlideIndex > 0) {
       // console.log(this.currentSlideIndex);
       this.currentSlideIndex--;
+
       this.renderVisualsAsync(this.slides[this.currentSlideIndex]);
     }
   }

@@ -201,3 +201,18 @@ export const AskingPrompt = (input) => {
   };
   return param;
 };
+export const teachingPrompt = (input) => {
+  const message = `
+  your characteristic :
+   comprehensive teaching ,think on student point of view ,gives an relatable examples, explain more depth and 
+   now you teaching  " ${input.topic}"
+  `;
+  const param = {
+    message,
+    // response_format: {
+    //   type: "json_object",
+    //   schema: schemas.visuals,
+    // },
+  };
+  return param;
+};

@@ -25,7 +25,7 @@ export const Tools = {
 
     textEl.classList.add("textElement");
     textEl.classList.add(settings.TextAnimation);
-    textEl.innerHTML = marked.parse(text);
+    textEl.innerHTML = marked.parse(text).replaceAll("\n", "<br>");
     textEl.style.color = color;
     return textEl;
     // console.log(text);
@@ -34,6 +34,7 @@ export const Tools = {
     const mermaidecodeGen = new Agents(settings.ApiEndpoint, settings.ApiKey);
     console.log(context);
     const diagram = document.createElement("div");
+
     diagram.classList.add("diagram");
     mermaidecodeGen.setBody(mermaidPrompt({ description: context }));
     return await mermaidecodeGen.getData().then(async (d) => {
