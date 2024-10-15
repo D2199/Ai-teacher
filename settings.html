@@ -22,11 +22,21 @@
             color: wheat;
             font-size: large;
             background-color: rgb(7, 134, 134);
-        }
-
-        input {
             padding: 10px;
         }
+
+        details {
+            overflow: hidden;
+        }
+
+        summary {
+            background-color: rgb(24, 205, 144);
+            padding: 10px;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+
+        input {}
 
         .form-items {
             text-align: left;
@@ -47,9 +57,19 @@
 
 <body>
     <nav>
-        <li class="btn"><a href="./create_sylab.html">create course</a></li>
-        <li class="btn"><a href="./settings.html">Settings</a></li>
-        <li class="btn"><a href="view_course.html">view courses</a></li>
+
+        <a href="./index.html">
+            <li class="btn">home</li>
+        </a>
+        <a href="./create_sylab.html">
+            <li class="btn"> course</li>
+        </a>
+        <a href="./settings.html">
+            <li class="btn">Settings</li>
+        </a>
+        <a href="./view_course.html">
+            <li class="btn">view courses</li>
+        </a>
 
     </nav>
     <main>
@@ -59,8 +79,8 @@
                     class="set"></div>
             <div class="form-items"><label for="">Text Animation</label><select name="TextAnimation" id="TextAnimation"
                     class="set" onchange="txtViusal()">
-                    <option value="feadin">feadin</option>
-                    <option value="Transform">Transform</option>
+                    <!-- <option value="feadin">feadin</option>
+                    <option value="Transform">Transform</option> -->
                 </select>
 
                 <div class="text-visual"> Animation visual</div>
@@ -96,8 +116,12 @@
             }
             else if (e.name == 'rate') {
                 e.value = settings.voice[e.name] * 100 / 10
+                console.log(e.value)
             }
-            e.value = settings.voice[e.name]
+            else {
+
+                e.value = settings.voice[e.name]
+            }
             console.log(e.value)
         })
         const voiceSet = document.querySelectorAll('.voice-set')
@@ -131,14 +155,24 @@
             for (let i = 0; i < voices.length; i++) {
                 const option = document.createElement("option");
                 option.textContent = `${voices[i].name} (${voices[i].lang})`;
-                option.value = voices[i];
+                option.value = voices[i].voiceURI;
+                // console.log(voices[i])
                 voiceSelect.appendChild(option);
             }
+            console.log(voices.filter((e) => e.voiceURI == "urn:moz-tts:speechd:Amharic+female4?am"))
         }
         loadVoices()
+        const textAnim = document.querySelector('#TextAnimation')
         function txtViusal() {
-            document.querySelector('.text-visual').classList.add(document.querySelector('#TextAnimation').value)
+            document.querySelector('.text-visual').classList.add(textAnim.value)
         }
+        console.log(textAnim.children)
+        settings.TextAnimationOptions.forEach((e) => {
+            let option = document.createElement('option')
+            option.textContent = e
+            option.value = e
+            textAnim.appendChild(option)
+        })
         //         document.querySelector('#TextAnimation').addEventListener('change',(e)=>{
         // document(e.target.value)
         //         })

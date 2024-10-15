@@ -2,216 +2,319 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Dutor</title>
-  <style>
-    body {
-      padding: 0;
-      margin: 0;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Index</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
 
-    /* .mermaid {
-      width: 500px;
-      overflow: hidden;
+        :root {
+            --btn-bg: #ff217d;
+            --primery-color: #272a34;
+            --secondery-color: #3476e6;
+            --tritery-color: #3476e6;
+            --btn-color: rgb(255, 255, 255);
+        }
 
-    } */
-    #board {
-      width: 100%;
-    }
+        body {
+            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--primery-color);
+            position: relative;
+        }
 
-    #board svg {
-      width: 100%;
-      text-align: center;
-      /* display: none; */
-      max-width: 100% !important;
+        nav {
+            display: flex;
+            justify-content: end;
+            background-color: var(--secondery-color);
 
-    }
+            padding: 5px;
+            gap: 20px;
+        }
 
-    .title {
-      font-size: xx-large;
-      font-weight: bolder;
-      color: blue;
-    }
+        nav>a>li {
+            list-style: none;
+            background-color: var(--btn-bg);
+            padding: 5px;
+        }
 
-    .textEl {
-      /* background-color: yellowgreen; */
-      padding: 2px;
-      text-align: start;
-      /* flex-wrap: wrap;
-      font-size: auto; */
-      /* background-color: rgb(200, 197, 197); */
-      border-radius: 10px;
-      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-      padding: 10px;
-      margin: 5px;
+        a {
+            color: white;
+            /* padding: 10px; */
+            text-decoration: none;
+        }
 
-    }
+        .btn {
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            color: var(--btn-color);
+            background-color: var(--btn-bg);
+            /* font-size: 1.5sch; */
+        }
 
-    .textAnimation-typing {
-      animation-name: typing;
-      animation-duration: 5s;
-      animation-timing-function: ease-in-out;
+        .btn:hover {
+            background-color: #f45f36;
+        }
 
-    }
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
 
-    @keyframes typing {
-      from {
-        width: 1rem;
-        text-wrap: nowrap;
-        overflow: hidden;
-        /* transform: translateX(100px); */
-      }
+        .hero .container {
+            z-index: 1;
+            /* background-color: #232324; */
+            text-align: center;
+            padding: 10px;
+        }
 
-      to {
-        width: 100%;
-      }
+        .hero h1 {
+            font-size: 48px;
+            font-weight: bold;
+            color: #18f2bf;
+        }
 
-    }
+        .hero p {
+            font-size: 18px;
+            color: #f0e6e6;
+            margin-bottom: 30px;
+        }
 
-    .container {
-      border: 2px solid black;
-      flex-direction: column;
-      /* font-size: 0.1em; */
-      overflow: scroll;
-      display: flex;
-      text-align: left;
-      justify-content: center;
-      align-items: start;
+        .hero .btn {
+            background-color: #4caf50;
+            color: #fff;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
 
-      /* display: grid; */
-      grid-template-columns: auto auto auto;
-      height: 100%;
-      width: 100%
-    }
+        .hero .background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            opacity: 0.2;
+            z-index: 0;
+        }
 
+        .hero .background img {
+            object-fit: cover;
+            width: 100%;
+            height: 100%;
+        }
 
+        .learning-companion {
+            color: white;
+            background: var(--primery-color);
+            padding: 50px 0;
+        }
 
-    /* .pieCircle {
-      background-color: black; 
-    transform: rotateX(20deg);
-    transition-timing-function: ease-in;
-     transform: scaleX(300); 
-    animation: pic 1 ease-in 0 infinite 2;
-    } */
+        .learning-companion .container {
+            max-width: 800px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            margin: 0 auto;
+            gap: 20px;
+        }
 
+        .learning-companion h2 {
+            font-size: 36px;
+            margin-bottom: 20px;
+        }
 
-    /* @keyframes pic {
-      0% {
-         transform: rotateX(20deg); 
-    }
+        .learning-companion .features {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
 
-    50% {
-      transform: rotateX(50deg);
-    }
+        .learning-companion .feature {
+            margin: 20px;
 
-    100% {
-      transform: rotateX(100deg);
-    }
-    }*/
-  </style>
+            background-color: #f45f36;
+            padding: 10px;
+            text-align: center;
+            width: 300px;
+            border-radius: 10px;
+            box-shadow: 10px 10px 10px rgb(26, 26, 26);
+        }
+
+        .learning-companion .feature i {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        .learning-companion .how-it-works ol {
+            list-style: decimal;
+            padding: 20px;
+            background-color: #ff217d;
+            width: 100vw;
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .learning-companion .how-it-works ol li {
+            padding: 5px;
+            margin: 10px;
+            background-color: #3476e6;
+            padding-right: 30px;
+            border-radius: 0 50% 50% 0;
+        }
+
+        .learning-companion .benefits ul {
+            list-style: disc;
+        }
+
+        .learning-companion .get-started {
+            background-color: #4caf50;
+            color: #fff;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .typo_anim {
+            animation: typo 2s linear 0s 1 alternate forwards;
+
+            overflow: hidden;
+            text-overflow: hidden;
+            white-space: nowrap;
+            text-overflow: hidden;
+            border-right: 1px solid black;
+            width: 0px;
+        }
+
+        @keyframes typo {
+            from {}
+
+            to {
+                width: min-content;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero {
+                height: 80vh;
+            }
+
+            .hero h1 {
+                font-size: 36px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero {
+                height: 60vh;
+            }
+
+            .hero h1 {
+                font-size: 24px;
+            }
+        }
+    </style>
 </head>
 
 <body>
-  <div class="container">
-    <div class="textEl title textAnimation-typing">'Common Social Engineering Techniques'</div>
+    <nav>
 
-    <div id="board">
+        <a href="./index.html">
+            <li class="btn">home</li>
+        </a>
+        <a href="./create_sylab.html">
+            <li class="btn"> course</li>
+        </a>
+        <a href="./settings.html">
+            <li class="btn">Settings</li>
+        </a>
+        <a href="./view_course.html">
+            <li class="btn">view courses</li>
+        </a>
 
-    </div>
-    <div class="textEl textAnimation-typing">'Phishing: Attackers send fraudulent emails or messages pretending to be
-      from reputable
-      sources,
-      tricking victims into revealing personal information or downloading malware.''</div>
-    <div class="textEl textAnimation-typing">Impersonation: Scammers pretend to be someone the victim trusts, such as a
-      colleague or
-      authority figure, to gain access to secure areas or data.</div>
-    <div class="textEl textAnimation-typing">'Bypassing Security: Exploiting trust relationships to bypass security
-      measures and gain
-      physical or digital access.' </div>
-    <div class="textEl">Data Theft: Once inside, attackers steal confidential information, leading to data breaches and
-      identity theft.</div>
-    <div class="textEl"></div>
-    <script type="module">
+    </nav>
+    <main>
+        <section class="hero">
+            <div class="container">
+                <h1 class="typo_anim">Unlock Your Potential</h1>
+                <p>Discover a smarter way to learn with AI-powered education</p>
+                <a href="./create_sylab.html"> <button class="btn">Get Started</button></a>
+            </div>
+            <div class="background">
+                <img draggable="false" src="./img/hero_img.jpeg" alt="Hero Image">
+            </div>
+        </section>
+
+        <section class="main">
+
+            <section class="learning-companion">
+                <div class="container">
+                    <h2>Intelligent Learning Companion</h2>
+                    <p>Create. Visualize. Engage.</p>
+                    <div class="features">
+                        <div class="feature">
+                            <i class="fas fa-book"></i>
+                            <h3>Syllabus Creation</h3>
+                            <p>Collaborate with our LLM to generate customized syllabi</p>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-image"></i>
+                            <h3>Interactive Visuals</h3>
+                            <p>Automatically generated visuals and diagrams</p>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-volume-up"></i>
+                            <h3>Voice Narration</h3>
+                            <p>Immerse yourself in audio narratives</p>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-question-circle"></i>
+                            <h3>LLM Q&A</h3>
+                            <p>Interact with our LLM to clarify doubts</p>
+                        </div>
+                    </div>
+                    <div class="how-it-works">
+                        <h3>How it Works</h3>
+                        <ol>
+                            <li>Input syllabus requirements</li>
+                            <li>Collaborate with LLM</li>
+                            <li>Generate interactive visuals</li>
+                            <li>Engage with voice narration</li>
+                            <li>Ask questions to LLM</li>
+                        </ol>
+                    </div>
+                    <div class="benefits ">
+                        <h3>Benefits</h3>
+                        <ul>
+                            <li class="typo_anim" style="animation-delay: 0s;">Personalized learning pathways</li>
+                            <li class="typo_anim" style="animation-delay: 2s;">Enhanced engagement and retention</li>
+                            <li class="typo_anim" style="animation-delay: 4s;"> Efficient syllabus creation</li>
+                            <li class="typo_anim" style="animation-delay: 6s;">Access to expert-level knowledge</li>
+                        </ul>
+                    </div>
+                    <a href="./create_sylab.html"> <button class="get-started">Create Your Syllabus Today</button></a>
+                </div>
+            </section>
 
 
-      // console.log(mermaid)
-      // console.log(await drawDiagram())
-      // const l = mermaid.render('.mermaid', ```
-      //     graph LR
-      //     classDef living stroke - dasharray: 5 5;
-      //     classDef dead fill: #ffaaaa, stroke: #ff0000, stroke - width: 2px;
-      //     classDef male fill: #aaddff, stroke:#5555ff, stroke - width: 2px;
-      //     classDef female fill: #ffaaaa, stroke: #ff0000, stroke - width: 2px;
+        </section>
+        <section class="footer">
 
-      //     subgraph Fertilization
-      // Sperm((Sperm))::: male
-      // Egg((Egg))::: female
-      // Zygote((Zygote))::: living
-      // end
-
-      //     subgraph Pregnancy
-      // Embryo((Embryo))::: living
-      // Fetus((Fetus))::: living
-      // end
-
-      //     subgraph Birth
-      // Newborn((Newborn))::: living
-      // end
-
-      //     subgraph Life
-      // Infant((Infant))::: living
-      // Child((Child))::: living
-      // Adolescent((Adolescent))::: living
-      // Adult((Adult))::: living
-      // Elderly((Elderly))::: living
-      // end
-
-      //     subgraph Death
-      // Deceased((Deceased))::: dead
-      // end
-
-      // Sperm - > Zygote
-      // Egg-- > Zygote
-      // Zygote-- > Embryo
-      // Embryo-- > Fetus
-      // Fetus-- > Newborn
-      // Newborn-- >| Growth and Development | Infant
-      // Infant-- > Child
-      // Child-- > Adolescent
-      // Adolescent-- > Adult
-      // Adult-- > Elderly
-      // Elderly-- > Deceased```.replace('\n', ';'))
-    </script>
-    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
-    <script type="module" src="main.js"></script>
-    <script>
-      // gsap.from('.mermaid', { duration: 1, x: '100', delay: 1 })
-      // gsap.registerPlugin(MotionPathPlugin);
-
-
-      // console.log(document.getElementsByClassName('pieOuterCircle')[0])
-      // console.log(gsap)
-      document.body.onload = () => {
-        // gsap.from('.pieCircle', { duration: 1, x: '100', rotateY: "20deg" })
-        // gsap.to("#board", {
-        //   duration: 5,
-        //   repeat: 12,
-        //   repeatDelay: 3,
-        //   yoyo: true,
-        //   ease: "power1.inOut",
-        //   motionPath: {
-        //     path: ".pieCircle",
-        //     align: ".pieCircle",
-        //     autoRotate: true,
-        //     alignOrigin: [0.5, 0.5]
-        //   }
-        // });
-        // console.log(document.querySelector(''))
-      }
-      // gsap.from(l, { duration: 1, x: '100', stagger: 0.5 })
-
-    </script>
+        </section>
+    </main>
 </body>
 
 </html>

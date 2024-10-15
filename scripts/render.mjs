@@ -1,6 +1,7 @@
 import { sample } from "./sampls.mjs";
 import { Tools } from "./Tools.mjs";
-
+const userSettings = JSON.parse(localStorage.getItem("settings"));
+console.log(userSettings);
 // function speech(text) {
 //   const speech = new SpeechSynthesisUtterance(text);
 //   speech.rate = 0.7;
@@ -140,12 +141,15 @@ export class Presentation {
   }
   playNarration(narration) {
     const speech = new SpeechSynthesisUtterance(narration);
-    speech.rate = 0.7;
-    speech.pitch = 1;
+    const voices = this.speechSynthesis.getVoices();
+    speech.rate = userSettings.voice.rate;
+    speech.pitch = userSettings.voice.pitch;
     // await this.playNarration(slide.narration);
 
-    speech.voice = speechSynthesis.getVoices()[9359];
-    speech.lang = "en-GB";
+    speech.voice = voices.filter(
+      (e) => e.voiceURI == userSettings.voice.voice
+    )[0]; //userSettings.voice.voice;
+    speech.lang = userSettings.voice.lang;
     let i = 0;
     return speech;
     this.speech.onend = (e) => {

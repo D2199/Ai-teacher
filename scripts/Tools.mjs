@@ -1,5 +1,5 @@
 import { Agents } from "./Agent.mjs";
-import { settings } from "./settings.mjs";
+// import { settings } from "./settings.mjs";
 import { marked } from "https://cdn.jsdelivr.net/npm/marked/lib/marked.esm.js";
 import { MermaidPasser } from "./utils.mjs";
 import { mermaidPrompt } from "./Prompts.mjs";
@@ -9,6 +9,7 @@ mermaid.initialize({
 
   securityLevel: "loose",
 });
+const userSettings = JSON.parse(localStorage.getItem("settings"));
 export const Tools = {
   mermaideTool: function (name, code) {
     const mermaidecodeGen = new Agents();
@@ -24,7 +25,7 @@ export const Tools = {
     // textEl.setAttribute("class", "textElement");
 
     textEl.classList.add("textElement");
-    textEl.classList.add(settings.TextAnimation);
+    textEl.classList.add(userSettings.TextAnimation);
     textEl.innerHTML = marked.parse(text).replaceAll("\n", "<br>");
     textEl.style.color = color;
     return textEl;
