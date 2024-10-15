@@ -77,7 +77,7 @@ function getSylable(name, description) {
   SyllabusAgt.setBody(syllabusPrompt({ topic: name, description }));
   loader.style.display = "block";
   SyllabusAgt.getData().then((d) => {
-    localStorage.setItem(name, d.text);
+    localStorage.setItem(name.trim(), d.text);
     loader.style.display = "none";
     const absoluteURL = new URL(
       "/Myproject/sylab_show.html?name=" + name,
@@ -89,7 +89,7 @@ function getSylable(name, description) {
 }
 document.getElementById("form").addEventListener("submit", (e) => {
   e.preventDefault();
-  const name = document.getElementById("course-name").value;
+  const name = document.getElementById("course-name").value.trim();
   const description = document
     .getElementById("course-description")
     .value.trim();
