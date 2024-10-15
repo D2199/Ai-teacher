@@ -32,7 +32,10 @@ export const Tools = {
     // console.log(text);
   },
   diagramTool: async ({ context }) => {
-    const mermaidecodeGen = new Agents(settings.ApiEndpoint, settings.ApiKey);
+    const mermaidecodeGen = new Agents(
+      userSettings.ApiEndpoint,
+      userSettings.ApiKey
+    );
     console.log(context);
     const diagram = document.createElement("div");
 
