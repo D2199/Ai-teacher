@@ -35,9 +35,9 @@ nav {
   display: flex;
   justify-content: end;
   background-color: var(--secondery-color);
-
-  padding: 10px;
-  gap: 20px;
+  flex-wrap: wrap;
+  /* padding: 10px; */
+  gap: 1%;
 }
 
 nav > a > li {
@@ -46,10 +46,11 @@ nav > a > li {
   padding: 10px;
 }
 
-a {
+nav > a {
   color: white;
   /* padding: 10px; */
   text-decoration: none;
+  margin: 10px;
 }
 
 .btn {

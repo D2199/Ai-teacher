@@ -23,10 +23,12 @@ else {
   }
 }
 const Sylabel = JSON.parse(localStorage.getItem(nameid));
+const Settings = JSON.parse(localStorage.getItem("settings"));
+console.log(Settings);
 let cuttentTopic = {};
 cuttentTopic.course = Sylabel.course;
 const loader = document.querySelector(".loader");
-const presentation = new Presentation(settings.AutoPlay);
+const presentation = new Presentation(Settings.AutoPlay);
 // const playBtn = document.getElementsByClassName("play-btn");
 // for (let i = 0; i < playBtn.length; i++) {
 //   playBtn[i].addEventListener("click", (ev) => {
@@ -88,7 +90,7 @@ function renderSylab(sylab) {
 }
 
 async function teache(topic) {
-  const VisualAgt = new Agents(settings.ApiEndpoint, settings.ApiKey);
+  const VisualAgt = new Agents(Settings.ApiEndpoint, Settings.ApiKey);
   VisualAgt.setBody(visualPrompt({ topic }));
   loader.style.display = "flex";
   await VisualAgt.getData().then((d) => {
