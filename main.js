@@ -80,7 +80,7 @@ function getSylable(name, description) {
     localStorage.setItem(name.trim(), d.text);
     loader.style.display = "none";
     const absoluteURL = new URL(
-      "/Myproject/sylab_show.html?name=" + name,
+      "./sylab_show.html?name=" + name,
       window.location.href
     );
     // Redirect to the absolute URL
