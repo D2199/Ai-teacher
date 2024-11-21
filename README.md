@@ -1,4 +1,4 @@
-#AI Teacher
+AI Teacher
 
 Overview
 
