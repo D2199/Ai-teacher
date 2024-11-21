@@ -1,4 +1,3 @@
-
 #AI Teacher
 
 Overview
